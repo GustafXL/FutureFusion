@@ -1,4 +1,4 @@
-# FutureFusion
+# Future Fusion
 A store different from the others
 
 # Node version
