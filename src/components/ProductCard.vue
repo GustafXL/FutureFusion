@@ -31,17 +31,13 @@
 
 <script lang="ts">
 import { useCounterStore } from '../stores/counter';
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 
 export default defineComponent({
 
   setup() {
     const counter = useCounterStore();
     return { counter };
-  },
-
-  mounted() {
-    this.counter.getAllProducts();
   },
 
   methods: {

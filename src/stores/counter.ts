@@ -4,16 +4,21 @@ import type { Product } from '@/types/Product';
 export const useCounterStore = defineStore('counter', {
   state:  () => ({
     products: <Product[]>([]),
-    cart: <Product[]>([])
+    cart: <Product[]>([]),
+    loading: false,
+    page: 1
   }),
 
   actions: {
     async getAllProducts() {
-      const URL = 'https://dummyjson.com/products';
+      const URL = `https://dummyjson.com/products`;
+      if(this.loading) return;
+      this.loading = true;
       try {
         const response = await fetch(URL);
         const data = await response.json();
-        this.products = data.products;
+        this.products = this.products.concat(data.products);
+        this.loading = false;
       } catch(err) {
         console.log(err);
       }
