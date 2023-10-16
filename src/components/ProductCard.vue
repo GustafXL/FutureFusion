@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col bg-black rounded-3xl max-w-[300px]" v-for="product in products" :key="product.id">
+  <div class="flex flex-col bg-black justify-between rounded-3xl max-w-[300px]" v-for="product in counter.products" :key="product.id">
   <div class="px-6 py-8 sm:p-10 sm:pb-6">
     <div class="grid items-center justify-center w-full grid-cols-1 text-left">
       <div>
@@ -18,8 +18,11 @@
       </div>
     </div>
   </div>
-  <div class="flex px-6 pb-8 sm:px-8">
-    <button aria-describedby="tier-starter" class="items-center justify-center w-full px-6 py-2.5 text-center text-black duration-200 bg-white border-2 border-white rounded-full nline-flex hover:bg-transparent hover:border-white hover:text-white focus:outline-none focus-visible:outline-white text-sm focus-visible:ring-white" href="#">
+  <div class="flex flex-col space-y-5 px-6 pb-8 sm:px-8">
+    <button 
+    @click="counter.addToCart(product.title, product.description, product.price)"
+    aria-describedby="tier-starter" 
+    class="items-center justify-center w-full px-6 py-2.5 text-center text-black duration-200 bg-white border-2 border-white rounded-full nline-flex hover:bg-transparent hover:border-white hover:text-white focus:outline-none focus-visible:outline-white text-sm focus-visible:ring-white">
       Add to Cart
     </button>
   </div>
@@ -27,6 +30,7 @@
 </template>
 
 <script lang="ts">
+import { useCounterStore } from '../stores/counter';
 import { defineComponent } from 'vue'
 
 export default defineComponent({
@@ -34,22 +38,16 @@ export default defineComponent({
     products: []
   }),
 
+  setup() {
+    const counter = useCounterStore();
+    return { counter };
+  },
+
   mounted() {
-    this.getAllProducts();
+    this.counter.getAllProducts();
   },
 
   methods: {
-    async getAllProducts() {
-      const URL = 'https://dummyjson.com/products';
-      try {
-        const response = await fetch(URL);
-        const data = await response.json();
-        console.log(data.products);
-        this.products = data.products;
-      } catch(err) {
-        console.log(err);
-      }
-    },
     
     formatDollar(value:number) {
       const format = new Intl.NumberFormat('en-US', {
@@ -58,7 +56,7 @@ export default defineComponent({
       })
 
       return format.format(value)
-    }
+    },
   }
 })
 </script>
