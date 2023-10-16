@@ -20,7 +20,7 @@
   </div>
   <div class="flex flex-col space-y-5 px-6 pb-8 sm:px-8">
     <button 
-    @click="counter.addToCart(product.title, product.description, product.price)"
+    @click="counter.addToCart(product.id, product.title, product.description, product.price, product.discountPercentage)"
     aria-describedby="tier-starter" 
     class="items-center justify-center w-full px-6 py-2.5 text-center text-black duration-200 bg-white border-2 border-white rounded-full nline-flex hover:bg-transparent hover:border-white hover:text-white focus:outline-none focus-visible:outline-white text-sm focus-visible:ring-white">
       Add to Cart
@@ -34,9 +34,6 @@ import { useCounterStore } from '../stores/counter';
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  data: () => ({
-    products: []
-  }),
 
   setup() {
     const counter = useCounterStore();

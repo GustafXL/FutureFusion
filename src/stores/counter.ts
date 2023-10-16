@@ -3,7 +3,7 @@ import type { Product } from '@/types/Product';
 
 export const useCounterStore = defineStore('counter', {
   state:  () => ({
-    products: [],
+    products: <Product[]>([]),
     cart: <Product[]>([])
   }),
 
@@ -19,11 +19,13 @@ export const useCounterStore = defineStore('counter', {
       }
     },
 
-    addToCart(info:string, description:string, price:number) {
+    addToCart(id:number, info:string, description:string, price:number, discountPercentage: number) {
       const product: Product = {
+        id: id,
         title: info,
         description: description,
-        price: price
+        price: price,
+        discountPercentage: discountPercentage
       }
       this.cart.push(product)
       localStorage.setItem('product', JSON.stringify(this.cart));

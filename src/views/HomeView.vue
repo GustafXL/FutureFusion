@@ -1,8 +1,3 @@
-<script setup lang="ts">
-import ProductCard from '../components/ProductCard.vue';
-import Logo from '../components/Logo.vue';
-</script>
-
 <template>
   <main>
     <div class="space-y-10">
@@ -14,3 +9,18 @@ import Logo from '../components/Logo.vue';
     </div>
   </main>
 </template>
+
+<script lang="ts">
+import ProductCard from '../components/ProductCard.vue';
+import Logo from '../components/Logo.vue';
+import { useCounterStore } from '../stores/counter';
+
+export default {
+  components: { ProductCard, Logo },
+
+  setup() {
+    const counter = useCounterStore();
+    return { counter };
+  },
+}
+</script>

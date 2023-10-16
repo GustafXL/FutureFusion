@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import Mobile from '../components/Mobile.vue';
+import Mobile from './Mobile.vue';
 export default {
     components: { Mobile }
 }
