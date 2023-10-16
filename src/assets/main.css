@@ -1,35 +1,132 @@
-@import './base.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
+#checkbox {
+  display: none;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+.toggle {
+  position: relative;
+  width: 40px;
+  cursor: pointer;
+  margin: auto;
+  display: block;
+  height: calc(4px * 3 + 11px * 2);
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
+.bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: calc(4px / 2);
+  background: white;
+  color: inherit;
+  opacity: 1;
+  transition: none 0.35s cubic-bezier(.5,-0.35,.35,1.5) 0s;
+}
+
+/***** Spin Animation *****/
+
+.bar--top {
+  bottom: calc(50% + 11px + 4px/ 2);
+  transition-property: bottom,transform;
+  transition-delay: calc(0s + 0.35s),0s;
+}
+
+.bar--middle {
+  top: calc(50% - 4px/ 2);
+  transition-property: opacity;
+  transition-delay: calc(0s + 0.35s);
+}
+
+.bar--bottom {
+  top: calc(50% + 11px + 4px/ 2);
+  transition-property: top,transform;
+  transition-delay: calc(0s + 0.35s),0s;
+}
+
+#checkbox:checked + .toggle .bar--top {
+  bottom: calc(50% - 4px/ 2);
+  transform: rotate(135deg);
+  transition-delay: 0s,calc(0s + 0.35s);
+}
+
+#checkbox:checked + .toggle .bar--middle {
+  opacity: 0;
+  transition-duration: 0s;
+  transition-delay: calc(0s + 0.35s);
+}
+
+#checkbox:checked + .toggle .bar--bottom {
+  top: calc(50% - 4px/ 2);
+  transform: rotate(225deg);
+  transition-delay: 0s,calc(0s + 0.35s);
+}
+
+/* Mobile */
+
+.mobile-open {
+  position: fixed;
+  right: 0px;
+  top: 70px;
+  flex-direction: column;
+  background: black;
+  height: 60px;
+  width: 130px;
+  border-radius: 0px 0px 20px 20px;
+  padding: 2px;
+  animation-name: mobileOpen;
+  animation-duration: .9s;
+}
+
+.mobile-close {
+  animation-name: mobileClose;
+  animation-duration: .9s;
+}
+
+@keyframes mobileOpen {
+  0% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes mobileClose {
+  100% { transform: translateY(0px); }
+  0% { transform: translateY(-20px); }
+}
+
+.loader {
+  display: flex;
+  align-items: center;
+}
+
+.load {
+  display: inline-block;
+  width: 3px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, .5);
+  border-radius: 10px;
+  animation: scale-up4 3s linear infinite;
+}
+
+.load:nth-child(2) {
+  height: 35px;
+  margin: 0 5px;
+  animation-delay: .25s;
+}
+
+.load:nth-child(3) {
+  animation-delay: .5s;
+}
+
+@keyframes scale-up4 {
+  20% {
+    background-color: #ffff;
+    transform: scaleY(1.5);
   }
-}
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
-
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+  40% {
+    transform: scaleY(1);
   }
 }

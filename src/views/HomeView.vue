@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import ProductCard from '../components/ProductCard.vue';
+import Logo from '../components/Logo.vue';
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <div class="space-y-10">
+      <Logo />
+
+      <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-5 justify-items-center p-5">
+        <ProductCard />
+      </div>
+    </div>
   </main>
 </template>
