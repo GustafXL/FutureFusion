@@ -3,7 +3,7 @@
     <div class="space-y-10">
       <Logo />
 
-      <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-5 justify-items-center p-5" ref="scrollComponent">
+      <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-5 justify-items-center p-5">
         <ProductCard />
       </div>
 
